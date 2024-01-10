@@ -20,9 +20,9 @@ public class ElementsTests {
      */
     @Test
     void testTextBox() {
-        List<String> expFields = Arrays.asList("Full Name", "Email", "Current Address", "Permanent Address");
-        List<String> fieldsId = Arrays.asList("userName", "userEmail", "currentAddress", "permanentAddress");
-        List<String> fieldsValue = Arrays.asList("Aleks Smith", "Aleks@gmail.com", "Moscow city", "Red Square");
+//        List<String> expFields = Arrays.asList("Full Name", "Email", "Current Address", "Permanent Address");
+//        List<String> fieldsId = Arrays.asList("userName", "userEmail", "currentAddress", "permanentAddress");
+//        List<String> fieldsValue = Arrays.asList("Aleks Smith", "Aleks@gmail.com", "Moscow city", "Red Square");
 
         open("https://demoqa.com/text-box");
         $(fullName).setValue("Aleks Smith");
