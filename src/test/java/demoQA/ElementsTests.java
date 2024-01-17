@@ -1,18 +1,16 @@
 package demoQA;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Driver;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static com.codeborne.selenide.CollectionCondition.*;
+import static com.codeborne.selenide.CollectionCondition.size;
+import static com.codeborne.selenide.CollectionCondition.texts;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public class ElementsTests {
     private final SelenideElement
@@ -28,29 +26,39 @@ public class ElementsTests {
      */
     @Test
     void testTextBox() {
-        System.setProperty("webdriver.chrome.driver", "D:\\dev\\drivers\\yandexdriver.exe");
-        Configuration.browserBinary="C:\\Users\\alex_\\AppData\\Local\\Yandex\\YandexBrowser\\Application\\browser.exe";
         Configuration.reopenBrowserOnFail = true;
         Configuration.browserSize = "1920x1080";
-        Configuration.pageLoadTimeout = 300000L;
         Configuration.pageLoadStrategy = "eager";
-//        Configuration.browser="firefox";
         List<String> expFields = Arrays.asList("Full Name", "Email", "Current Address", "Permanent Address");
 //        List<String> fieldsId = Arrays.asList("userName", "userEmail", "currentAddress", "permanentAddress");
-//        List<String> fieldsValue = Arrays.asList("Aleks Smith", "Aleks@gmail.com", "Moscow city", "Red Square");
+        List<String> fieldsValue = Arrays.asList("Aleks Smith", "Aleks@gmail.com", "Moscow city", "Red Square");
 
         open("https://demoqa.com/text-box");
         $$(".form-label").shouldHave(texts(expFields)).shouldHave(size(4));
-        $(fullName).setValue("Aleks Smith");
-        $(email).setValue("Aleks@gmail.com");
-        $(currentAddress).setValue("Moscow city");
-        $(permanentAddress).setValue("Red Square");
+        $(fullName).setValue(fieldsValue.get(0));
+        $(email).setValue(fieldsValue.get(1));
+        $(currentAddress).setValue(fieldsValue.get(2));
+        $(permanentAddress).setValue(fieldsValue.get(3));
         $("#submit").scrollIntoView(true).click();
-        $("p#name").scrollIntoView(true).shouldHave(text("Name:"));
+        $("p#name").scrollIntoView(true).shouldHave(text("Name:" + fieldsValue.get(0)));
+        $("p#email").shouldHave(text("Email:" + fieldsValue.get(1)));
+        $("p#currentAddress").shouldHave(text("Current Address :" + fieldsValue.get(2)));
+        $("p#permanentAddress").shouldHave(text("Permananet Address :" + fieldsValue.get(3)));
 
 //        for (int i = 0; i < expFields.size(); i++) {
 //            $(String.format("#%s", fieldsId.get(i))).setValue(fieldsValue.get(i));
 //        }
+    }
+
+    @Test
+    void testTextBox_v2() {
+        Configuration.reopenBrowserOnFail = true;
+        Configuration.browserSize = "1920x1080";
+        Configuration.pageLoadStrategy = "eager";
+        System.setProperty("webdriver.chrome.driver", "D:\\dev\\drivers\\yandexdriver.exe");
+        Configuration.browserBinary = "C:\\Users\\alex_\\AppData\\Local\\Yandex\\YandexBrowser\\Application\\browser.exe";
+
+
     }
 }
 
