@@ -31,7 +31,7 @@ public class ElementsTests extends TestBase {
 //        List<String> fieldsId = Arrays.asList("userName", "userEmail", "currentAddress", "permanentAddress");
         List<String> fieldsValue = Arrays.asList("Aleks Smith", "Aleks@gmail.com", "Moscow city", "Red Square");
 
-        open("https://demoqa.com/text-box");
+        open("/text-box");
         $$(".form-label").shouldHave(texts(expFields)).shouldHave(size(4));
         $(fullName).setValue(fieldsValue.get(0));
         $(email).setValue(fieldsValue.get(1));
