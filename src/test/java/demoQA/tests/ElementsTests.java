@@ -1,7 +1,8 @@
-package demoQA;
+package demoQA.tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
+import demoQA.TestBase;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -12,7 +13,7 @@ import static com.codeborne.selenide.CollectionCondition.texts;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
-public class ElementsTests {
+public class ElementsTests extends TestBase {
     private final SelenideElement
             fullName = $("#userName"),
             email = $("#userEmail"),
@@ -26,9 +27,6 @@ public class ElementsTests {
      */
     @Test
     void testTextBox() {
-        Configuration.reopenBrowserOnFail = true;
-        Configuration.browserSize = "1920x1080";
-        Configuration.pageLoadStrategy = "eager";
         List<String> expFields = Arrays.asList("Full Name", "Email", "Current Address", "Permanent Address");
 //        List<String> fieldsId = Arrays.asList("userName", "userEmail", "currentAddress", "permanentAddress");
         List<String> fieldsValue = Arrays.asList("Aleks Smith", "Aleks@gmail.com", "Moscow city", "Red Square");
