@@ -55,8 +55,7 @@ public class ElementsTests extends TestBase {
         Configuration.pageLoadStrategy = "eager";
         System.setProperty("webdriver.chrome.driver", "D:\\dev\\drivers\\yandexdriver.exe");
         Configuration.browserBinary = "C:\\Users\\alex_\\AppData\\Local\\Yandex\\YandexBrowser\\Application\\browser.exe";
-
-
     }
+
 }
 

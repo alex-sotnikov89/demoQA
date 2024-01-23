@@ -1,12 +1,19 @@
 package demoQA.tests;
 
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import demoQA.TestBase;
 import demoQA.models.M_PracticeForm;
 import demoQA.pages.PracticeFormPage;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 
 import java.time.LocalDate;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
 public class PracticeFormTests extends TestBase {
@@ -15,6 +22,7 @@ public class PracticeFormTests extends TestBase {
     @Test
     void name() {
         practiceFormPage.openPage();
+
         practiceFormPage.fillForm(
                 M_PracticeForm
                         .builder()
@@ -30,7 +38,11 @@ public class PracticeFormTests extends TestBase {
                         .state("Haryana")
                         .city("Karnal")
                         .build());
-        $("#submit").click();
+        $("#submit").scrollIntoView(true).click();
+        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
+        practiceFormPage.verifyResults("Student Name", "Masha Night");
+        practiceFormPage.verifyResults("Student Email", "night_masha@r.com");
+        practiceFormPage.verifyResults("Gender", "Female");
     }
 
 }

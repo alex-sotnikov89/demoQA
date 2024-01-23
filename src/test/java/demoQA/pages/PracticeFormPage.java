@@ -2,7 +2,9 @@ package demoQA.pages;
 
 import com.codeborne.selenide.SelenideElement;
 import demoQA.models.M_PracticeForm;
+import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
@@ -14,7 +16,7 @@ public class PracticeFormPage {
     SelenideElement gender = $("#genterWrapper");
     SelenideElement mobile = $("#userNumber");
     SelenideElement dateOfBirth = $("#dateOfBirthInput");
-    SelenideElement datePicker = $("[data-placement='bottom-start']");
+    SelenideElement datePicker = $("[data-placement*='start']");
     SelenideElement subjects = $("#subjectsInput");
     SelenideElement hobbies = $("#hobbiesWrapper");
     SelenideElement currentAddress = $("#currentAddress");
@@ -63,12 +65,16 @@ public class PracticeFormPage {
             currentAddress.sendKeys(practiceForm.getCurrentAddress());
         }
         if (practiceForm.getState() != null) {
-            state.click();
+            state.scrollIntoView(true).click();
             state.$(byText(practiceForm.getState())).click();
         }
         if (practiceForm.getCity() != null) {
             city.click();
             city.$(byText(practiceForm.getCity())).click();
         }
+    }
+
+    public void verifyResults(String key, String value) {
+        $(".table-hover").$(byText(key)).parent().$("td+td").shouldHave(text(value));
     }
 }
