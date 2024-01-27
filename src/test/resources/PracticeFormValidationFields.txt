@@ -1,0 +1,9 @@
+Student Name
+Student Email
+Gender
+Mobile
+Date of Birth
+Subjects
+Hobbies
+Address
+State and City

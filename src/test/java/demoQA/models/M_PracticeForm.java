@@ -14,7 +14,7 @@ public final class M_PracticeForm {
     private String gender;
     private String mobile;
     private LocalDate dateOfBirth;
-    private String subjects;
+    private String[] subjects;
     private String[] hobbies;
     private String currentAddress;
     private String state;
