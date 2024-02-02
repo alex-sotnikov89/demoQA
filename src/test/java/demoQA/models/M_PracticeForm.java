@@ -2,9 +2,11 @@ package demoQA.models;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.time.LocalDate;
 
+@ToString
 @Getter
 @Builder
 public final class M_PracticeForm {
