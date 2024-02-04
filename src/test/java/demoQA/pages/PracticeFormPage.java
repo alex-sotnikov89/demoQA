@@ -93,6 +93,7 @@ public class PracticeFormPage {
     }
 
     public void verifyResults(M_PracticeForm expFields) throws IOException {
+        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
         try (InputStream is = cl.getResourceAsStream("PracticeFormValidationFields.txt");
              BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(is)))
         ) {
