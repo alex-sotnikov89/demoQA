@@ -2,6 +2,7 @@ package demoQA.pages;
 
 import com.codeborne.selenide.SelenideElement;
 import demoQA.models.M_PracticeForm;
+import org.junit.jupiter.api.Assertions;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,6 +13,7 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.StringJoiner;
 
+import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.byValue;
@@ -35,11 +37,12 @@ public class PracticeFormPage {
     SelenideElement state = $("#state");
     SelenideElement city = $("#city");
 
-    public void openPage() {
+    public PracticeFormPage openPage() {
         open("/automation-practice-form");
+        return this;
     }
 
-    public void fillForm(M_PracticeForm practiceForm) {
+    public PracticeFormPage fillForm(M_PracticeForm practiceForm) {
         if (practiceForm.getFirstName() != null) {
             firstName.sendKeys(practiceForm.getFirstName());
         }
@@ -86,13 +89,15 @@ public class PracticeFormPage {
             city.click();
             city.$(byText(practiceForm.getCity())).click();
         }
+        return this;
     }
 
-    public void verifyResults(String key, String value) {
+    public PracticeFormPage verifyResults(String key, String value) {
         submitForm.$(byText(key)).parent().$("td+td").shouldHave(text(value));
+        return this;
     }
 
-    public void verifyResults(M_PracticeForm expFields) throws IOException {
+    public PracticeFormPage verifyResults(M_PracticeForm expFields) throws IOException {
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
         try (InputStream is = cl.getResourceAsStream("PracticeFormValidationFields.txt");
              BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(is)))
@@ -143,5 +148,22 @@ public class PracticeFormPage {
                 verifyResults(field, expFields.getState() + " " + expFields.getCity());
             }
         }
+        return this;
+    }
+
+    public PracticeFormPage submit() {
+        $("#submit").scrollIntoView(true).click();
+        return this;
+    }
+
+    public PracticeFormPage verifyVoidRequiredField(SelenideElement element) {
+        element.shouldHave(cssClass("was-validated"));
+
+        return this;
+    }
+
+    public PracticeFormPage verifyVoidRequiredFields(M_PracticeForm form) {
+
+        return this;
     }
 }

@@ -14,8 +14,4 @@ public class TestBase {
         Configuration.pageLoadStrategy = "eager";
         Configuration.baseUrl = ("https://demoqa.com");
     }
-
-    @BeforeEach
-    void name1() {
-    }
 }

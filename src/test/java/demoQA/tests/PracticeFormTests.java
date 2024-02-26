@@ -11,6 +11,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.io.IOException;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 
 public class PracticeFormTests extends TestBase {
     PracticeFormPage practiceFormPage = new PracticeFormPage();
@@ -21,7 +22,7 @@ public class PracticeFormTests extends TestBase {
     void positiveInputFields(M_PracticeForm mPracticeForm) throws IOException {
         practiceFormPage.openPage();
         practiceFormPage.fillForm(mPracticeForm);
-        $("#submit").scrollIntoView(true).click();
+        practiceFormPage.submit();
         practiceFormPage.verifyResults(mPracticeForm);
     }
 
@@ -29,8 +30,13 @@ public class PracticeFormTests extends TestBase {
     @Tags({@Tag("UI-Test"), @Tag("BLOCKER")})
     @MethodSource("demoQA.parameters.PracticeFormParam#fillNegativeArguments")
     void negativeInputFields(M_PracticeForm mPracticeForm) {
-        practiceFormPage.openPage();
-        practiceFormPage.fillForm(mPracticeForm);
+        practiceFormPage
+                .openPage()
+                .submit();
+        sleep(1000);
+        practiceFormPage.verifyVoidRequiredField($("#firstName"));
+
 
     }
+
 }
